@@ -1,15 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnityChan\Scripts\ThirdPersonCamera.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnityChan\Scripts\FirstPersonCamera.cs">
     <Files>
-      <File FileName="Assets\Amount.cs" Line="22" Column="3" />
-      <File FileName="Assets\main_menu.cs" Line="18" Column="1" />
-      <File FileName="Assets\endgame_menu.cs" Line="1" Column="1" />
-      <File FileName="Assets\createObject.cs" Line="27" Column="15" />
-      <File FileName="Assets\Ai.cs" Line="21" Column="36" />
-      <File FileName="Assets\UnityChan\Scripts\ThirdPersonCamera.cs" Line="29" Column="34" />
-      <File FileName="Assets\UnityChan\Scripts\CameraController.cs" Line="21" Column="22" />
-      <File FileName="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" Line="20" Column="11" />
+      <File FileName="Assets\UnityChan\Scripts\ThirdPersonCamera.cs" Line="10" Column="1" />
+      <File FileName="Assets\UnityChan\Scripts\FirstPersonCamera.cs" Line="4" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

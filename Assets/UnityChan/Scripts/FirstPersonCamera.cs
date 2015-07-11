@@ -1,5 +1,5 @@
 ﻿//
-// Unityちゃん用の三人称カメラ
+// Unityちゃん用の一人称カメラ
 // 
 // 2013/06/07 N.Kobyasahi
 //
@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 
 
-public class ThirdPersonCamera : MonoBehaviour
+public class FirstPersonCamera : MonoBehaviour
 {
 	public float smooth = 3f;		// カメラモーションのスムーズ化用変数
 	Transform standardPos;			// the usual position for the camera, specified by a transform in the game
