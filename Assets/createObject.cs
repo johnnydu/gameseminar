@@ -13,6 +13,8 @@ public class createObject : MonoBehaviour {
 	public Transform rock5;
 	public int rockNumber=0;
 
+	static int currentScore =0;
+
 
 	// Use this for initialization
 	void Start () {
