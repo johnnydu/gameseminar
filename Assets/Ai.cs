@@ -7,6 +7,7 @@ public class Ai : MonoBehaviour {
     private NavMeshAgent agent;
     private NavMeshPath path;
     private bool isPlaying;
+    public Amount playerHealth;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,6 @@ public class Ai : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         if (isPlaying) {
             Play();
         } else {
@@ -47,6 +47,13 @@ public class Ai : MonoBehaviour {
                 GetComponent<Animation>().PlayQueued("Run", QueueMode.CompleteOthers);
         }
     	return;
+    }
+
+    void OnCollisionEnter(Collision collision){
+        Debug.Log("collide");
+        //if(collision.gameObject.CompareTag("Player")) {
+           playerHealth.damaged();
+        //}
     }
 
     void GameOver() {

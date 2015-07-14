@@ -3,40 +3,40 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Amount : MonoBehaviour {
-	 public Text scoreText;
+	 
+	 public Text scoreText = null;
+	 public Text starsText = null;
 	 public Slider hp;
-	 public GameObject player = null;
-	 public GameObject spider = null;
-	 public GameObject coins = null;
 	 int score;
+	 int stars;
 
 	// Use this for initialization
 	void Start () {
-		if (player == null)
-       	    player = GameObject.Find("unitychan");
-       	if (spider == null)
-       	    spider = GameObject.Find("SPIDER");
 		score = 0;
-		scoreText.text = score.ToString();
+		stars = 0;
 		hp.value = 100;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = score.ToString();
-		if (!spider.GetComponent<Animation>().IsPlaying("Attack") 
-			&& !player.GetComponent<Animation>().IsPlaying("angry1@unitychan")) {
+		scoreText.text = "Score: " + score.ToString();
+		starsText.text = "Stars: " + stars.ToString();
 
-			hp.value -= 5;
-			player.GetComponent<Animation>().Play("angry1@unitychan");
-
-		}
-		if (isPlayerDead()) {
-			player.GetComponent<Animation>().Play("angry2@unitychan");
-		}
 	}
 
-	bool isPlayerDead() {
-		return hp.value == 0;
+	public void damaged() {
+		hp.value -= 5;
+	}
+
+	public void ball_collected() {
+		if (hp.value < 100) {
+			hp.value += 1;
+		}
+		score += 1;
+	}
+
+	public void star_collected() {
+		stars += 1;
 	}
 }
