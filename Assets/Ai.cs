@@ -6,7 +6,6 @@ public class Ai : MonoBehaviour {
     public GameObject player = null;
     private NavMeshAgent agent;
     private NavMeshPath path;
-    private bool isPlaying;
     public Amount playerHealth;
 
 	// Use this for initialization
@@ -16,12 +15,11 @@ public class Ai : MonoBehaviour {
 
         agent = transform.GetComponent<NavMeshAgent>();
         path = new NavMeshPath();
-        isPlaying = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (isPlaying) {
+        if (!playerHealth.isPlayerDead()) {
             Play();
         } else {
             GameOver();
@@ -37,8 +35,10 @@ public class Ai : MonoBehaviour {
     void decideAction() {
         var distance = Vector3.Distance(player.transform.position, transform.position);
         if (distance < 3.5) {
-            if (!GetComponent<Animation>().IsPlaying("Attack"))
+            if (!GetComponent<Animation>().IsPlaying("Attack")) {
     	       GetComponent<Animation>().PlayQueued("Attack", QueueMode.PlayNow);
+               playerHealth.damaged();
+            }
             //GetComponent<Animation>().PlayQueued("Idle", QueueMode.CompleteOthers);
             //GetComponent<Animation>().PlayQueued("Idle", QueueMode.CompleteOthers);
             //isPlaying = false;
@@ -49,16 +49,15 @@ public class Ai : MonoBehaviour {
     	return;
     }
 
-    void OnCollisionEnter(Collision collision){
-        Debug.Log("collide");
-        //if(collision.gameObject.CompareTag("Player")) {
-           playerHealth.damaged();
-        //}
-    }
+    //void OnCollisionEnter(Collision collision){
+    //    Debug.Log("collide");
+    //    if(collision.gameObject.CompareTag("Player")) {
+    //      playerHealth.damaged();
+    //    }
+    //}
 
     void GameOver() {
         agent.Stop();
-        // Fade.use.Alpha(guiTexture, 1.0, 0.0, 3.0);
         if (!GetComponent<Animation>().isPlaying) {
             Application.LoadLevel (2);
         }

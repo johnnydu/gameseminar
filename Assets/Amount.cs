@@ -39,4 +39,8 @@ public class Amount : MonoBehaviour {
 	public void star_collected() {
 		stars += 1;
 	}
+
+	public bool isPlayerDead() {
+		return hp.value == 0;
+	}
 }
