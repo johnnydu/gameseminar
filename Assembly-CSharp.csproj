@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Ai.cs" />
      <Compile Include="Assets\Amount.cs" />
+     <Compile Include="Assets\Initialize_Game.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCameraRig.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCommon.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRDisplay.cs" />
@@ -73,8 +74,10 @@
      <Compile Include="Assets\ball_collect.cs" />
      <Compile Include="Assets\createObject.cs" />
      <Compile Include="Assets\endgame_menu.cs" />
+     <Compile Include="Assets\flavios_butt.cs" />
      <Compile Include="Assets\game_with_chan.cs" />
      <Compile Include="Assets\main_menu.cs" />
+     <Compile Include="Assets\weapon.cs" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
      <None Include="Assets\Plugins\donotdelete.txt" />
