@@ -3,40 +3,64 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Amount : MonoBehaviour {
-	 public Text scoreText;
+	 
+	 public GameObject player;
+	 public Text scoreText = null;
+	 public Text starsText = null;
 	 public Slider hp;
-	 public GameObject player = null;
-	 public GameObject spider = null;
-	 public GameObject coins = null;
+	 public GameObject star;
+	 int ballsCollected;
 	 int score;
+	 int stars;
 
 	// Use this for initialization
 	void Start () {
-		if (player == null)
-       	    player = GameObject.Find("unitychan");
-       	if (spider == null)
-       	    spider = GameObject.Find("SPIDER");
 		score = 0;
-		scoreText.text = score.ToString();
+		stars = 0;
+		ballsCollected = 0;
 		hp.value = 100;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = score.ToString();
-		if (!spider.GetComponent<Animation>().IsPlaying("Attack") 
-			&& !player.GetComponent<Animation>().IsPlaying("angry1@unitychan")) {
+		scoreText.text = "Score: " + score.ToString();
+		starsText.text = "Stars: " + stars.ToString();
 
-			hp.value -= 5;
-			player.GetComponent<Animation>().Play("angry1@unitychan");
+		//for (int i = 0; i < stars; i++) {
+			//Instantiate(ball, new Vector3(player.transform.position.x + 2, player.transform.position.y, player.transform.position.z), player.transform.rotation);
+		//}
 
-		}
-		if (isPlayerDead()) {
-			player.GetComponent<Animation>().Play("angry2@unitychan");
-		}
 	}
 
-	bool isPlayerDead() {
+	public void attackedBySpider() {
+		hp.value -= 5;
+	}
+
+	public void pickUpBall() {
+		if (hp.value < 100)
+			hp.value += 1;
+		score += 1;
+		ballsCollected += 1;
+	}
+
+	public void pickUpStar() {
+		stars += 1;
+	}
+
+	public bool useStar() {
+		if (stars > 0) {
+			stars -= 1;
+			return true;
+		}
+		return false;
+	}
+
+	public int getNumBallsCollected() {
+		return ballsCollected;
+	}
+
+	public bool isPlayerDead() {
 		return hp.value == 0;
 	}
 }

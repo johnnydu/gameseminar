@@ -6,25 +6,27 @@ public class Ai : MonoBehaviour {
     public GameObject player = null;
     private NavMeshAgent agent;
     private NavMeshPath path;
-    private bool isPlaying;
+    public Amount playerHealth;
+    public bool spiderDie;
 
 	// Use this for initialization
 	void Start () {
         if (player == null)
             player = GameObject.Find("unitychan");
+        spiderDie = false;
 
         agent = transform.GetComponent<NavMeshAgent>();
         path = new NavMeshPath();
-        isPlaying = true;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (isPlaying) {
+        if (spiderDie) {
+            killSpider();
+        } else if (!playerHealth.isPlayerDead()) {
             Play();
         } else {
-            GameOver();
+            gameOver();
         }
 	}
 
@@ -37,8 +39,10 @@ public class Ai : MonoBehaviour {
     void decideAction() {
         var distance = Vector3.Distance(player.transform.position, transform.position);
         if (distance < 3.5) {
-            if (!GetComponent<Animation>().IsPlaying("Attack"))
+            if (!GetComponent<Animation>().IsPlaying("Attack")) {
     	       GetComponent<Animation>().PlayQueued("Attack", QueueMode.PlayNow);
+               playerHealth.attackedBySpider();
+            }
             //GetComponent<Animation>().PlayQueued("Idle", QueueMode.CompleteOthers);
             //GetComponent<Animation>().PlayQueued("Idle", QueueMode.CompleteOthers);
             //isPlaying = false;
@@ -49,9 +53,24 @@ public class Ai : MonoBehaviour {
     	return;
     }
 
-    void GameOver() {
+    void OnTriggerEnter(Collider collision) {
+        if (!GetComponent<Animation>().IsPlaying("Death")) {
+            if(collision.gameObject.CompareTag("throwableShuriken")) {
+                Destroy(collision.gameObject);
+                GetComponent<Animation>().PlayQueued("Death", QueueMode.PlayNow);
+                spiderDie = true;
+            }
+        }
+    }
+
+    void killSpider() {
         agent.Stop();
-        // Fade.use.Alpha(guiTexture, 1.0, 0.0, 3.0);
+        if (!GetComponent<Animation>().IsPlaying("Death"))
+           Destroy(gameObject);
+    }
+
+    // Losing Screen
+    void gameOver() {
         if (!GetComponent<Animation>().isPlaying) {
             Application.LoadLevel (2);
         }
