@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Ai.cs" />
      <Compile Include="Assets\Amount.cs" />
+     <Compile Include="Assets\Gem Shader\Example\GemSpawner.cs" />
      <Compile Include="Assets\Initialize_Game.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCameraRig.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCommon.cs" />
@@ -96,6 +97,7 @@
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
      <None Include="Assets\Plugins\x86\donotdelete.txt" />
+     <None Include="Assets\Gem Shader\diamond shader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
