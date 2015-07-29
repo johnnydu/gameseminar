@@ -13,21 +13,21 @@ public class Initialize_Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		myBalls = new GameObject[] { 
-				(GameObject) Instantiate(ball, new Vector3(-3, 1.3f, 0), ball.transform.rotation),
-				(GameObject) Instantiate(ball, new Vector3(-2, 1.3f, 0), ball.transform.rotation),
-				(GameObject) Instantiate(ball, new Vector3(-1, 1.3f, 0), ball.transform.rotation),
-				(GameObject) Instantiate(ball, new Vector3(0, 1.3f, 0), ball.transform.rotation),
-				(GameObject) Instantiate(ball, new Vector3(1, 1.3f, 0), ball.transform.rotation),
-				(GameObject) Instantiate(ball, new Vector3(2, 1.3f, 0), ball.transform.rotation),
-				(GameObject) Instantiate(ball, new Vector3(3, 1.3f, 0), ball.transform.rotation) 
+				(GameObject) Instantiate(ball, new Vector3(0, 1.5f, 0), ball.transform.rotation),
+				// (GameObject) Instantiate(ball, new Vector3(-2, 1.3f, 0), ball.transform.rotation),
+				// (GameObject) Instantiate(ball, new Vector3(-1, 1.3f, 0), ball.transform.rotation),
+				// (GameObject) Instantiate(ball, new Vector3(0, 1.3f, 0), ball.transform.rotation),
+				// (GameObject) Instantiate(ball, new Vector3(1, 1.3f, 0), ball.transform.rotation),
+				// (GameObject) Instantiate(ball, new Vector3(2, 1.3f, 0), ball.transform.rotation),
+				// (GameObject) Instantiate(ball, new Vector3(3, 1.3f, 0), ball.transform.rotation) 
 			};
-		Instantiate(star, new Vector3(-3, 1.3f, 3), star.transform.rotation);
-		Instantiate(star, new Vector3(-2, 1.3f, 3), star.transform.rotation);
-		Instantiate(star, new Vector3(-1, 1.3f, 3), star.transform.rotation);
-		Instantiate(star, new Vector3(0, 1.3f, 3), star.transform.rotation);
-		Instantiate(star, new Vector3(1, 1.3f, 3), star.transform.rotation);
-		Instantiate(star, new Vector3(2, 1.3f, 3), star.transform.rotation);
-		Instantiate(star, new Vector3(3, 1.3f, 3), star.transform.rotation);
+		// Instantiate(star, new Vector3(-3, 1.3f, 3), star.transform.rotation);
+		// Instantiate(star, new Vector3(-2, 1.3f, 3), star.transform.rotation);
+		// Instantiate(star, new Vector3(-1, 1.3f, 3), star.transform.rotation);
+		// Instantiate(star, new Vector3(0, 1.3f, 3), star.transform.rotation);
+		// Instantiate(star, new Vector3(1, 1.3f, 3), star.transform.rotation);
+		// Instantiate(star, new Vector3(2, 1.3f, 3), star.transform.rotation);
+		Instantiate(star, new Vector3(3, 1.5f, 3), star.transform.rotation);
 
 		Invoke("respawnSpider", 7);
 		Invoke("respawnSpider", 14);
@@ -60,7 +60,7 @@ public class Initialize_Game : MonoBehaviour {
 	}
 
 	public void respawnSpider() {
-		Instantiate(spider, new Vector3(0f, 0f, 0f), gameObject.transform.rotation);
+		//Instantiate(spider, new Vector3(0f, 0f, 0f), gameObject.transform.rotation);
 	}
 
 	public int getBallSize() {
