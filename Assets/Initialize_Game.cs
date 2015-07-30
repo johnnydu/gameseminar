@@ -3,24 +3,24 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Initialize_Game : MonoBehaviour {
-	 public GameObject star;
-	 public GameObject ball;
-	 public GameObject spider;
-	 public GameObject[] myBalls;
+	public GameObject star;
+	public GameObject ball;
+	public GameObject spider;
+	public GameObject[] myBalls;
 
-	 int waitTime = 100;
+	int waitTime = 100;
 
 	// Use this for initialization
 	void Start () {
 		myBalls = new GameObject[] { 
-				(GameObject) Instantiate(ball, new Vector3(0, 1.5f, 0), ball.transform.rotation),
-				// (GameObject) Instantiate(ball, new Vector3(-2, 1.3f, 0), ball.transform.rotation),
-				// (GameObject) Instantiate(ball, new Vector3(-1, 1.3f, 0), ball.transform.rotation),
-				// (GameObject) Instantiate(ball, new Vector3(0, 1.3f, 0), ball.transform.rotation),
-				// (GameObject) Instantiate(ball, new Vector3(1, 1.3f, 0), ball.transform.rotation),
-				// (GameObject) Instantiate(ball, new Vector3(2, 1.3f, 0), ball.transform.rotation),
-				// (GameObject) Instantiate(ball, new Vector3(3, 1.3f, 0), ball.transform.rotation) 
-			};
+			(GameObject) Instantiate(ball, new Vector3(30, 1.5f,37), ball.transform.rotation),
+			(GameObject) Instantiate(ball, new Vector3(25, 1.5f,37), ball.transform.rotation),
+			(GameObject) Instantiate(ball, new Vector3(20, 1.5f,37), ball.transform.rotation),
+			(GameObject) Instantiate(ball, new Vector3(15, 1.5f,37), ball.transform.rotation),
+			(GameObject) Instantiate(ball, new Vector3(10, 1.5f,37), ball.transform.rotation),
+			(GameObject) Instantiate(ball, new Vector3(5, 1.5f,37), ball.transform.rotation),
+			(GameObject) Instantiate(ball, new Vector3(0, 1.5f,37), ball.transform.rotation)
+		};
 		// Instantiate(star, new Vector3(-3, 1.3f, 3), star.transform.rotation);
 		// Instantiate(star, new Vector3(-2, 1.3f, 3), star.transform.rotation);
 		// Instantiate(star, new Vector3(-1, 1.3f, 3), star.transform.rotation);
@@ -35,7 +35,7 @@ public class Initialize_Game : MonoBehaviour {
 		Invoke("respawnSpider", 28);
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -66,4 +66,5 @@ public class Initialize_Game : MonoBehaviour {
 	public int getBallSize() {
 		return myBalls.Length;
 	}
+
 }
