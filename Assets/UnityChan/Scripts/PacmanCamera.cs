@@ -46,11 +46,9 @@ namespace UnityChan
 			
 			if (Input.GetButtonDown ("Firstview")) {	// left Ctlr	
 				current_view=1;
-			} 
-			else if (Input.GetButtonDown ("Thirdview")) {	//Alt	
+			} else if (Input.GetButtonDown ("Thirdview")) {	//Alt	
 				current_view=3;
-			} 
-			else if(Input.GetButtonDown ("Topview")){	
+			} else if(Input.GetButtonDown ("Topview")){	
 				current_view=5;
 			}
 			
