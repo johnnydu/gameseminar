@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\gameseminar-master\Assets\Initialize_Game.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\game_with_chan.cs">
     <Files>
-      <File FileName="..\gameseminar-master\Assets\Initialize_Game.cs" Line="3" Column="26" />
+      <File FileName="Assets\Amount.cs" Line="16" Column="32" />
+      <File FileName="Assets\game_with_chan.cs" Line="33" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

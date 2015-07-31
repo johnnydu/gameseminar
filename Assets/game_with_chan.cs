@@ -8,8 +8,14 @@ public class game_with_chan : MonoBehaviour {
 	public GameObject player;
 	public GameObject currStar;
 
+	public AudioClip sound_ball_clip;
+	public float sound_ball_volumn;
+	AudioSource audio;
+
 	// Use this for initialization
 	void Start () {
+
+		audio = GetComponent<AudioSource>();
 	
 	}
 	
@@ -24,6 +30,7 @@ public class game_with_chan : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision) {
 		if(collision.gameObject.CompareTag("ball")) {
+			audio.PlayOneShot(sound_ball_clip, sound_ball_volumn);
         	Destroy(collision.gameObject);
         	amount.pickUpBall();
     	}
@@ -31,6 +38,7 @@ public class game_with_chan : MonoBehaviour {
     	if(collision.gameObject.CompareTag("shuriken")) {
         	Destroy(collision.gameObject);
         	amount.pickUpStar();
+
     	}
 
         if(collision.gameObject.CompareTag("portalfujii")) {
