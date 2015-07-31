@@ -6,12 +6,12 @@ public class endgame_menu : MonoBehaviour {
     public Button play;
  
     void Start () {
-        play = play.GetComponent<Button> ();
+        //play = play.GetComponent<Button> ();
  
     }
 
     public void pressPlay() {
-    	Application.LoadLevel (0);
+    	//Application.LoadLevel (0);
     }
 }
 
