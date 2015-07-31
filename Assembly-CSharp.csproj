@@ -73,7 +73,6 @@
      <Compile Include="Assets\UnityChan\Scripts\SceneLoader.cs" />
      <Compile Include="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
      <Compile Include="Assets\ball_collect.cs" />
-     <Compile Include="Assets\createObject.cs" />
      <Compile Include="Assets\endgame_menu.cs" />
      <Compile Include="Assets\flavios_butt.cs" />
      <Compile Include="Assets\game_with_chan.cs" />
