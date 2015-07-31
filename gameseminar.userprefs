@@ -1,10 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnityChan\Scripts\PacmanCamera.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Ai.cs">
     <Files>
-      <File FileName="Assets\UnityChan\Scripts\PacmanCamera.cs" Line="31" Column="4" />
-      <File FileName="Assets\weapon.cs" Line="5" Column="2" />
+      <File FileName="Assets\Initialize_Game.cs" Line="9" Column="30" />
+      <File FileName="Assets\UnityChan\Scripts\PacmanCamera.cs" Line="46" Column="4" />
+      <File FileName="Assets\weapon.cs" Line="1" Column="1" />
       <File FileName="Assets\ball_collect.cs" Line="1" Column="1" />
+      <File FileName="Assets\Amount.cs" Line="40" Column="24" />
+      <File FileName="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" Line="208" Column="3" />
+      <File FileName="Assets\Ai.cs" Line="35" Column="1" />
+      <File FileName="Assets\game_with_chan.cs" Line="26" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
