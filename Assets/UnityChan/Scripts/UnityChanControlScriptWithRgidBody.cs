@@ -1,9 +1,9 @@
-﻿//
+//
 // Mecanimのアニメーションデータが、原点で移動しない場合の Rigidbody付きコントローラ
 // サンプル
 // 2014/03/13 N.Kobyasahi
 //
-/**
+
 using UnityEngine;
 using System.Collections;
 
@@ -209,7 +209,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		col.center = orgVectColCenter;
 	}
 }
-*/
+
+/**
 
 //
 // Mecanimのアニメーションデータが、原点で移動しない場合の Rigidbody付きコントローラ
@@ -307,7 +308,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 //	should be proportional so that they reach destination as soon
 //	as rotation is completed
 
-//	
+//	need to do: 
 
 	
 // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
@@ -448,7 +449,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
 		bool canRotate = false;
 		//currentLoc
-		/**
 		if (rotation == 0) {
 			canRotate = walkable[ map[nodePosition[currentLoc][0]+1] [nodePosition[currentLoc][1]] ];
 		} else if (rotation == 90) {
@@ -464,7 +464,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			canRotate = walkable[ map[nodePosition[currentLoc][0]] [nodePosition[currentLoc][1]-1] ]; 
 
 		}
-		*/
 
 		return canRotate;
 	}
@@ -496,3 +495,5 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		col.center = orgVectColCenter;
 	}
 }
+
+*/
