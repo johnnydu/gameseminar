@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\game_with_chan.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GesturesDemo\Scripts\GestureListener.cs">
     <Files>
-      <File FileName="Assets\Amount.cs" Line="16" Column="32" />
-      <File FileName="Assets\game_with_chan.cs" Line="33" Column="37" />
+      <File FileName="Assets\GesturesDemo\Scripts\GestureListener.cs" Line="67" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

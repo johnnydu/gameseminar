@@ -49,7 +49,17 @@
      <Compile Include="Assets\Ai.cs" />
      <Compile Include="Assets\Amount.cs" />
      <Compile Include="Assets\Gem Shader\Example\GemSpawner.cs" />
+     <Compile Include="Assets\GesturesDemo\Scripts\GestureListener.cs" />
+     <Compile Include="Assets\GesturesDemo\Scripts\PresentationScript.cs" />
      <Compile Include="Assets\Initialize_Game.cs" />
+     <Compile Include="Assets\KinectScripts\AvatarController.cs" />
+     <Compile Include="Assets\KinectScripts\Extras\LoadMainLevel.cs" />
+     <Compile Include="Assets\KinectScripts\Extras\MouseControl.cs" />
+     <Compile Include="Assets\KinectScripts\Extras\SetSceneAvatars.cs" />
+     <Compile Include="Assets\KinectScripts\Extras\SimpleGestureListener.cs" />
+     <Compile Include="Assets\KinectScripts\KinectGestures.cs" />
+     <Compile Include="Assets\KinectScripts\KinectManager.cs" />
+     <Compile Include="Assets\KinectScripts\KinectWrapper.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCameraRig.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRCommon.cs" />
      <Compile Include="Assets\OVR\Scripts\OVRDisplay.cs" />
@@ -82,6 +92,8 @@
      <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\Plugins\x86_64\donotdelete.txt" />
+     <None Include="Assets\Resources\OpenNI.ini.txt" />
+     <None Include="Assets\Resources\NiTE.ini.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
      <None Include="Assets\PainterlyNature\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\UnityChan\license.txt" />

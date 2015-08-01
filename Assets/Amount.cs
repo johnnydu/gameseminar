@@ -13,6 +13,9 @@ public class Amount : MonoBehaviour {
 	 int score;
 	 int stars;
 
+	//public Text calibrationText=null;
+	//public Text gestureText=null;
+
 	// Use this for initialization
 	void Start () {
 		score = 0;
@@ -26,7 +29,8 @@ public class Amount : MonoBehaviour {
 	void Update () {
 		scoreText.text = "Score: " + score.ToString();
 		starsText.text = "Stars: " + stars.ToString();
-
+		//calibrationText.text = "calibration";
+		//gestureText.text = "gesture";
 		//for (int i = 0; i < stars; i++) {
 			//Instantiate(ball, new Vector3(player.transform.position.x + 2, player.transform.position.y, player.transform.position.z), player.transform.rotation);
 		//}
