@@ -4,6 +4,8 @@
 // 2014/03/13 N.Kobyasahi
 //
 
+/**
+
 using UnityEngine;
 using System.Collections;
 
@@ -118,7 +120,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				}
 			}
 		}
-		
+
 		// 上下のキー入力でキャラクターを移動させる
 		transform.localPosition += velocity * Time.fixedDeltaTime;
 
@@ -270,7 +272,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	}
 }
 
-/**
+*/
 
 //
 // Mecanimのアニメーションデータが、原点で移動しない場合の Rigidbody付きコントローラ
@@ -329,12 +331,25 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 // additional parameters
 
 	private GameObject currentLoc;
+	private GameObject nextLoc;
 	private Quaternion nextRotation;
 	public GameObject[] map;
 
-	public static Dictionary<Transform, int[]> nodePosition;
-	public static Dictionary<Transform, bool> walkable;
+	bool user;
 
+	public static Dictionary<GameObject, int[]> nodePosition;
+	public static int[][] walkable;
+	private NavMeshAgent agent;
+    private NavMeshPath path;
+
+    private RaycastHit hit;
+
+
+
+
+    // fix collision prolbem HOPEFULLY
+    GameObject prevCol;
+    GameObject curCol;
 // 初期化
 	void Start ()
 	{
@@ -343,6 +358,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
 		nodePosition = AIMap.nodePosition;
 		walkable = AIMap.walkable;
+		user = true;
+
+		agent = transform.GetComponent<NavMeshAgent>();
+        path = new NavMeshPath();
 
 		/////
 
@@ -358,10 +377,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
 }
-	
-	void Update() {
-		Debug.Log(transform.rotation.eulerAngles);
-	}
+
 
 
 //  rotate player as they try to reach the destination (next node)
@@ -372,22 +388,57 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
 	
 // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
-	void FixedUpdate ()
+	void Update ()
 	{
-		//Vector3.right
-		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
-		if (Input.GetKey(KeyCode.RightArrow)) {
+
+		if (nodePosition == null) {
+			nodePosition = AIMap.nodePosition;
+		}
+
+		if (walkable == null) {
+			walkable = AIMap.walkable;
+		}
+
+
+
+		playGame();
+	}
+
+	void playGame() {
+		if (user) {
+			reAdjustPosition();
+			control();
+			Debug.Log("control");
+		} else {
+			auto();
+			Debug.Log("auto");
+		}
+	}
+
+	void control() {
+		//Debug.Log("Countinuously " + transform.rotation);
+		float h = Input.GetAxis("Horizontal");	;
+		//Debug.Log("Countinuously " + transform.rotation);
+		//float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
+		if (Input.GetKeyDown(KeyCode.RightArrow)) {
 			nextRotation = (transform.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
-			if (nextDestination(nextRotation.eulerAngles.y)) {
-				transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, 0.07f);
+			if (nextDestination(nextRotation.eulerAngles.y) == 1) {
+				user = false;
+				//transform.rotation = nextRotation;
+				//transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, 0.07f);
 			}
-		} else if (Input.GetKey(KeyCode.LeftArrow)) {
+		} else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
 			nextRotation = (transform.rotation * Quaternion.Euler(new Vector3(0, -90, 0)));
-			if (nextDestination(nextRotation.eulerAngles.y)) {
-				transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, 0.07f);
+			if (nextDestination(nextRotation.eulerAngles.y) == 1) {
+				user = false;
+				//transform.rotation = nextRotation;
+				//transform.rotation = Quaternion.Lerp(transform.rotation, nextRotation, 0.07f);
 			}
 		}
-		float v = 0.0f;										// 入力デバイスの垂直軸をvで定義
+		float v = 0.6f;
+		if (Physics.Raycast(transform.position, transform.forward, out hit, 3, 1 << 8)) {
+			v = 0f;								    // 入力デバイスの垂直軸をvで定義
+		}
 		anim.SetFloat("Speed", v);							// Animator側で設定している"Speed"パラメタにvを渡す
 		anim.SetFloat("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
 		anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
@@ -406,28 +457,18 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		} else if (v < -0.1) {
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
-		
-		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
-
-			//アニメーションのステートがLocomotionの最中のみジャンプできる
-			if (currentBaseState.nameHash == locoState){
-				//ステート遷移中でなかったらジャンプできる
-				if(!anim.IsInTransition(0))
-				{
-						rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-						anim.SetBool("Jump", true);		// Animatorにジャンプに切り替えるフラグを送る
-				}
-			}
-		}
-		
 
 		// 上下のキー入力でキャラクターを移動させる
 		transform.localPosition += velocity * Time.fixedDeltaTime;
 
+		// 左右のキー入力でキャラクタをY軸で旋回させる
+		//transform.Rotate(0, h * rotateSpeed, 0);	
+		
+
 		// 以下、Animatorの各ステート中での処理
 		// Locomotion中
 		// 現在のベースレイヤーがlocoStateの時
-		if (currentBaseState.nameHash == locoState){
+		if (currentBaseState.nameHash == locoState) {
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
 				resetCollider();
@@ -500,51 +541,90 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 	}
 
+	void auto() {
+		agent.Resume();
+		agent.CalculatePath(nextLoc.transform.position, path);
+        agent.SetPath(path);
+        bool compareX = Mathf.Abs(gameObject.transform.position.x - nextLoc.transform.position.x) < 0.1;
+        bool compareY = Mathf.Abs(gameObject.transform.position.y - nextLoc.transform.position.y) < 0.1;
+        bool compareZ = Mathf.Abs(gameObject.transform.position.z - nextLoc.transform.position.z) < 0.1;
+
+        if (compareX && compareY && compareZ) {
+        	user = true;
+        	agent.Stop();
+        	//Debug.Log("From " + " " + transform.rotation + " " + " to " + nextRotation);
+        	transform.rotation = nextRotation;
+        	//Debug.Log("This is now " +  transform.rotation);
+        }
+	}
 
 
-	bool nextDestination(float rotation) {
+	int nextDestination(float rotation) {
 
 		//find a way to get the location of the currentLoc in the map 
 		//array and use it to find the index of the next location.
 
-		bool canRotate = false;
-		//currentLoc
-		if (rotation == 0) {
-			canRotate = walkable[ map[nodePosition[currentLoc][0]+1] [nodePosition[currentLoc][1]] ];
-		} else if (rotation == 90) {
-			//nodePosition[currentLoc][0], nodePosition[currentLoc][1]+1;
-			canRotate = walkable[ map[nodePosition[currentLoc][0]] [nodePosition[currentLoc][1]+1] ];
+		int canRotate = 0;
+		int[] nodePos = nodePosition[currentLoc];
 
-		} else if (rotation == 180) {
-			//nodePosition[currentLoc][0]-1, nodePosition[currentLoc][1];
-			canRotate = walkable[ map[nodePosition[currentLoc][0]-1] [nodePosition[currentLoc][1]] ]; 
+		int nextX = 0;
+		int nextY = 0;
 
-		} else if (rotation == 270) {
-			//nodePosition[currentLoc][0], nodePosition[currentLoc][1]-1;
-			canRotate = walkable[ map[nodePosition[currentLoc][0]] [nodePosition[currentLoc][1]-1] ]; 
+		if (rotation > -40 && rotation < 40) {
+			if (nodePos[0]-1 >= 0)
+				canRotate = walkable[nodePos[0]-1][nodePos[1]];
 
-		}90
+			nextX = nodePos[0]-1;
+			nextY = nodePos[1];
+		} else if (rotation > 50 && rotation < 130) {
+			//nodePos[0], nodePos[1]+1;
+			if (nodePos[1]+1 < 16)
+				canRotate = walkable[nodePos[0]][nodePos[1]+1];
+
+			nextX = nodePos[0];
+			nextY = nodePos[1]+1;
+		} else if (rotation > 145 && rotation < 230) {
+			//nodePos[0]-1, nodePos[1];
+			if (nodePos[0]+1 < 16)
+				canRotate = walkable[nodePos[0]+1][nodePos[1]];
+
+			nextX = nodePos[0]+1;
+			nextY = nodePos[1];
+		} else if (rotation > 240 && rotation < 310) {
+			//nodePos[0], nodePos[1]-1;
+			if (nodePos[1]-1 >= 0)
+				canRotate = walkable[nodePos[0]][nodePos[1]-1];
+
+			nextX = nodePos[0];
+			nextY = nodePos[1]-1;
+		}
+		if (nextX >= 0 && nextX < 16 && nextY >= 0 && nextY < 16) {
+			nextLoc = map[nextX].transform.GetChild(nextY).gameObject;
+		}
+		//Debug.Log("current is: " + nodePos[0] + " " + nodePos[1] + "value is " + canRotate + "next is: " + " " + nextX + " " + nextY);
 
 		return canRotate;
 	}
 
-	void OnGUI( )
-	{
-		// GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
-		// GUI.Label(new Rect(Screen.width -245,30,250,30),"Up/Down Arrow : Go Forwald/Go Back");
-		// GUI.Label(new Rect(Screen.width -245,50,250,30),"Left/Right Arrow : Turn Left/Turn Right");
-		// GUI.Label(new Rect(Screen.width -245,70,250,30),"Hit Space key while Running : Jump");
-		// GUI.Label(new Rect(Screen.width -245,90,250,30),"Hit Spase key while Stopping : Rest");
-		// GUI.Label(new Rect(Screen.width -245,110,250,30),"Left Control : Front Camera");
-		// GUI.Label(new Rect(Screen.width -245,130,250,30),"Alt : LookAt Camera");
-	}
-
-
 	void OnCollisionEnter(Collision collision) {
-		if(collision.gameObject.CompareTag("node")) {
-        	currentLoc = collision.gameObject;
-        	//Debug.Log(currentLoc);
-    	}
+		if (collision.gameObject != prevCol) {
+			prevCol = curCol;
+			curCol = collision.gameObject;
+			if(collision.gameObject.CompareTag("node")) {
+	        	currentLoc = collision.gameObject;
+	    	}
+	    }
+    }
+
+    void reAdjustPosition() {
+    	if (nextLoc != null) {
+	    	bool compareX = gameObject.transform.rotation.eulerAngles.y == nextLoc.transform.rotation.eulerAngles.y;
+
+	        if (!compareX && nextDestination(nextRotation.eulerAngles.y) == 1) {
+	        	transform.rotation = nextRotation;
+	        }
+	        //Debug.Log("Should be this" + nextRotation);
+	    }
     }
 
 	// キャラクターのコライダーサイズのリセット関数
@@ -556,4 +636,3 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	}
 }
 
-*/

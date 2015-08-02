@@ -7,21 +7,36 @@ public class AIMap : MonoBehaviour {
 
 	private ArrayList vertices;
 	private ArrayList edges;
-	private Dictionary<Transform, ArrayList> map;
-	public static Dictionary<Transform, bool> walkable;
+	private Dictionary<GameObject, ArrayList> map;
+	public static int[][] walkable;
 
 
-	public static Dictionary<Transform, int[]> nodePosition;
+	public static Dictionary<GameObject, int[]> nodePosition;
 
 	void Start () {
 
 
-		nodePosition = new Dictionary<Transform, int[]>();
+		nodePosition = new Dictionary<GameObject, int[]>();
 		vertices = new ArrayList();
 		edges = new ArrayList();
-		map = new Dictionary<Transform, ArrayList>();
+		map = new Dictionary<GameObject, ArrayList>();
 
-		walkable = new Dictionary<Transform, bool>();
+		walkable = new int[][] { new int[] {1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1}, 
+								  new int[] {1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
+								  new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+								  new int[] {1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+								  new int[] {1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1},
+								  new int[] {0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0},
+								  new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+								  new int[] {1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1},
+								  new int[] {0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+								  new int[] {1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1},
+								  new int[] {1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1},
+								  new int[] {1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1},
+								  new int[] {0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+								  new int[] {1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1},
+								  new int[] {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+								  new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1} };
 
 
 		for (int i = 0; i < transform.childCount; i++) {
@@ -29,16 +44,17 @@ public class AIMap : MonoBehaviour {
 			for (int j = 0; j < child.childCount; j++) {
 
 				child.GetChild(j).gameObject.tag = "node";
-				nodePosition.Add(child.GetChild(j), new int[] {i, j});
+				nodePosition.Add(child.GetChild(j).gameObject, new int[] {i, j});
 				//walkable.Add(child.GetChild(j), );
 
 
 				child.GetChild(j).gameObject.GetComponent<Renderer>().enabled = false;
 
 				//add each node to vertice list
-				vertices.Add(child.GetChild(j));
+				//vertices.Add(child.GetChild(j));
 
 				//make edges and map
+				/**
 				ArrayList temp = new ArrayList();
 				if (j-1 >= 0) {
 					edges.Add(new Transform[] {child.GetChild(j), child.GetChild(j-1)});
@@ -63,7 +79,8 @@ public class AIMap : MonoBehaviour {
 					temp.Add(transform.GetChild(i+1).gameObject.transform.GetChild(j));
 				}
 
-				map.Add(child.GetChild(j), temp);
+				map.Add(child.GetChild(j).gameObject, temp);
+				*/
 			}
 		}
 
